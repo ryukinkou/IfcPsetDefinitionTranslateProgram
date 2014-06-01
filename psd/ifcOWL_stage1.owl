@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#' >
+	<!ENTITY xml 'http://www.w3.org/XML/1998/namespace#' >
+	<!ENTITY xlink 'http://www.w3.org/1999/xlink#' >
+	<!ENTITY owl 'http://www.w3.org/2002/07/owl#' >
+	<!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#' >
+	<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' >
+]>
+<rdf:RDF xmlns:fcn="http://www.liujinhang.cn/paper/ifc/xsd2owl-functions.xsl"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:xlink="http://www.w3.org/1999/xlink#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="">
+   <owl:Ontology rdf:about="">
+      <rdfs:comment>IFC</rdfs:comment>
+   </owl:Ontology>
+   <owl:ObjectProperty rdf:ID="any"/>
+   <owl:ObjectProperty rdf:about="#hasIfcVersion"/>
+   <owl:DatatypeProperty rdf:about="#version">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#schema">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#Name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#Definition">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#Applicability">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasApplicableClasses"/>
+   <owl:DatatypeProperty rdf:about="#ClassName">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#ApplicableTypeValue">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasPropertyDefs"/>
+   <owl:ObjectProperty rdf:about="#hasPropertyDef"/>
+   <owl:ObjectProperty rdf:about="#hasPsetDefinitionAliases"/>
+   <owl:ObjectProperty rdf:about="#hasPsetDefinitionAlias"/>
+   <owl:DatatypeProperty rdf:about="#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#ifdguid">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasTemplatetype"/>
+   <owl:ObjectProperty rdf:about="#hasValueDef"/>
+   <owl:ObjectProperty rdf:about="#hasMinValue"/>
+   <owl:DatatypeProperty rdf:about="#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasMaxValue"/>
+   <owl:ObjectProperty rdf:about="#hasDefaultValue"/>
+   <owl:ObjectProperty rdf:about="#hasNameAliases"/>
+   <owl:ObjectProperty rdf:about="#hasNameAlias"/>
+   <owl:ObjectProperty rdf:about="#hasDefinitionAliases"/>
+   <owl:ObjectProperty rdf:about="#hasDefinitionAlias"/>
+   <owl:ObjectProperty rdf:about="#hasPropertyType"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertySingleValue"/>
+   <owl:ObjectProperty rdf:about="#hasDataType"/>
+   <owl:ObjectProperty rdf:about="#hasUnitType"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertyEnumeratedValue"/>
+   <owl:ObjectProperty rdf:about="#hasEnumList"/>
+   <owl:DatatypeProperty rdf:about="#EnumItem">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasConstantList"/>
+   <owl:ObjectProperty rdf:about="#hasConstantDef"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertyBoundedValue"/>
+   <owl:ObjectProperty rdf:about="#hasValueRangeDef"/>
+   <owl:ObjectProperty rdf:about="#hasLowerBoundValue"/>
+   <owl:ObjectProperty rdf:about="#hasUpperBoundValue"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertyTableValue"/>
+   <owl:DatatypeProperty rdf:about="#Expression">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="#hasDefiningValue"/>
+   <owl:ObjectProperty rdf:about="#hasValues"/>
+   <owl:ObjectProperty rdf:about="#hasDefinedValue"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertyReferenceValue"/>
+   <owl:ObjectProperty rdf:about="#hasTypePropertyListValue"/>
+   <owl:ObjectProperty rdf:about="#hasListValue"/>
+   <owl:ObjectProperty rdf:about="#hasTypeComplexProperty"/>
+   <owl:ObjectProperty rdf:about="#hasType"/>
+   <owl:ObjectProperty rdf:about="#hasCurrencytype"/>
+   <owl:ObjectProperty rdf:about="#hasReftype"/>
+   <owl:DatatypeProperty rdf:about="#guid">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#URL">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#libraryname">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#sectionref">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="#ValueItem">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+</rdf:RDF>
