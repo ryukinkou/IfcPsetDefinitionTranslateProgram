@@ -150,6 +150,8 @@
 
 			<xsl:call-template name="simpleTypeTranslationTemplate" />
 
+			<xsl:call-template name="complexTypeTranslationTemplate" />
+
 		</rdf:RDF>
 
 	</xsl:template>
@@ -219,6 +221,47 @@
 
 	</xsl:template>
 
+	<xsl:template name="complexTypeTranslationTemplate">
+
+
+
+
+		<xsl:for-each select="//xsd:complexType">
+
+			<xsl:message select="'------'" />
+			<xsl:variable name="master">
+				<xsl:choose>
+					<xsl:when test="./@name">
+						<xsl:value-of select="./@name" />
+					</xsl:when>
+					<xsl:when test="not(./@name) and ./ancestor::*[@name]/@name">
+						<xsl:value-of select="./ancestor::*[@name][1]/@name" />
+					</xsl:when>
+				</xsl:choose>
+			</xsl:variable>
+			
+			<xsl:message> master : <xsl:value-of select="$master" /></xsl:message>
+
+			<xsl:for-each select="fcn:findNamedChildren(.)">
+
+				<xsl:message> slave : <xsl:value-of select="./@name" /> | <xsl:value-of select="./@type" /></xsl:message>
+
+			</xsl:for-each>
+
+
+
+
+
+
+
+		</xsl:for-each>
+
+	</xsl:template>
+
+
+
+
+
 	<xsl:template name="enumEndlessLoop">
 		<xsl:param name="pos" />
 		<xsl:param name="array" />
@@ -231,7 +274,7 @@
 			<xsl:choose>
 				<xsl:when test="count($array) >= $pos">
 					<rdf:rest>
-						<xsl:call-template name="endlessLoop">
+						<xsl:call-template name="enumEndlessLoop">
 							<xsl:with-param name="pos" select="$pos + 1" />
 							<xsl:with-param name="array" select="$array" />
 						</xsl:call-template>

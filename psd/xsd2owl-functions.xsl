@@ -254,4 +254,19 @@
 		</xsl:choose>
 	</xsl:function>
 
+	<xsl:function name="fcn:findNamedChildren">
+		<xsl:param name="currentLayer" />
+
+		<xsl:choose>
+			<xsl:when test="$currentLayer/child::*[@name]">
+				<xsl:sequence select="$currentLayer/child::*[@name]" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="fcn:findNamedChildren($currentLayer/child::*)" />
+			</xsl:otherwise>
+
+		</xsl:choose>
+
+	</xsl:function>
+
 </xsl:stylesheet>
