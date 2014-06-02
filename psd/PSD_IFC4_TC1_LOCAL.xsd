@@ -2,7 +2,9 @@
 <!-- PSD: Property Set Definition XSD, ver. 20140206 -->
 <!-- edited by Yoshinobu Adachi, buildingSMART Model Support Group -->
 <!-- updated by Tim Chipman, buildingSMART Model Support Group -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:ifc="http://www.buildingsmart-tech.org/ifcXML/IFC4/final"
+	targetNamespace="http://www.buildingsmart-tech.org/ifcXML/IFC4/final"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="PropertySetDef">
 		<xs:annotation>

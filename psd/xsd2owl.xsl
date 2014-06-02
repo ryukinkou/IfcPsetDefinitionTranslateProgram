@@ -146,8 +146,6 @@
 
 			<owl:ObjectProperty rdf:ID="any" />
 
-			<xsl:call-template name="property" />
-
 			<xsl:call-template name="simpleTypeTranslationTemplate" />
 
 			<xsl:call-template name="complexTypeTranslationTemplate" />
@@ -156,46 +154,14 @@
 
 	</xsl:template>
 
-	<xsl:template name="property">
-
-		<xsl:for-each
-			select=" 
-				//xsd:element [ @name and (ancestor::xsd:complexType or ancestor::xsd:group) 
-				and generate-id()=generate-id(key('propertyMap',concat(@name,'|',@type))[1])
-				and fcn:isNameIgnored(@name) = false() ] |
-				//xsd:attribute [ @name and (ancestor::xsd:complexType or ancestor::xsd:attributeGroup)
-				and generate-id()=generate-id(key('propertyMap',concat(@name,'|',@type))[1])
-				and fcn:isNameIgnored(@name) = false() ] ">
-
-			<xsl:variable name="currentName" select="./@name" />
-			<xsl:variable name="currentType" select="./@type" />
-
-			<xsl:choose>
-				<xsl:when test="$currentType and fcn:isXsdURI($currentType)">
-
-					<owl:DatatypeProperty rdf:about="{fcn:getFullName($currentName)}">
-						<rdfs:range rdf:resource="{fcn:getFullName($currentType)}" />
-					</owl:DatatypeProperty>
-
-				</xsl:when>
-				<xsl:otherwise>
-
-					<owl:ObjectProperty
-						rdf:about="{fcn:getFullName(fcn:getPredicate($currentName))}">
-					</owl:ObjectProperty>
-
-				</xsl:otherwise>
-			</xsl:choose>
-
-		</xsl:for-each>
-	</xsl:template>
-
 	<xsl:template name="simpleTypeTranslationTemplate">
 
 		<xsl:for-each select="//xsd:simpleType">
 
-			<xsl:variable name="simpleTypeName"
-				select="fcn:generateName(./ancestor::*[@name]/@name)" />
+			<!-- <xsl:variable name="simpleTypeName" select="fcn:generateName(./ancestor::*[@name]/@name)" 
+				/> -->
+
+			<xsl:variable name="simpleTypeName" select="./parent::*[@name]/@name" />
 
 			<xsl:variable name="enumArray" as="element()*"
 				select="./descendant::xsd:enumeration" />
@@ -223,13 +189,9 @@
 
 	<xsl:template name="complexTypeTranslationTemplate">
 
-
-
-
 		<xsl:for-each select="//xsd:complexType">
 
-			<xsl:message select="'------'" />
-			<xsl:variable name="master">
+			<xsl:variable name="subject">
 				<xsl:choose>
 					<xsl:when test="./@name">
 						<xsl:value-of select="./@name" />
@@ -240,27 +202,194 @@
 				</xsl:choose>
 			</xsl:variable>
 			
-			<xsl:message> master : <xsl:value-of select="$master" /></xsl:message>
+			<xsl:variable name="collectionType">
+					<xsl:value-of
+						select="./descendant::*[
+						fcn:getQName(name())='xsd:choice' or 
+						fcn:getQName(name())='xsd:sequence' or
+						fcn:getQName(name())='xsd:all'][1]/name()" />
+			</xsl:variable>
+			
+			<xsl:message>-------------------------------------------</xsl:message>
+			<xsl:message>subject: <xsl:value-of select="$subject" /></xsl:message>
 
-			<xsl:for-each select="fcn:findNamedChildren(.)">
-
-				<xsl:message> slave : <xsl:value-of select="./@name" /> | <xsl:value-of select="./@type" /></xsl:message>
-
+			<!-- 非继承式定义法 END -->
+			<xsl:for-each select="./child::*[@name]">
+				<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
 			</xsl:for-each>
+			
+			<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+			<xsl:for-each
+				select="(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]">
+				<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
+			</xsl:for-each>
+			<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+			<!-- 非继承式定义法 END -->
 
+			<!-- TODO 模板调用，when逻辑处理 -->
 
+			<!-- 复杂类型扩展型 -->
+			<xsl:if test="./xsd:complexContent">
+			
+				<xsl:variable name="subclassOf">
+					<xsl:value-of select="./descendant::xsd:extension/@base" />
+				</xsl:variable>
+				
+				<xsl:message>subclassOf: <xsl:value-of select="$subclassOf" /></xsl:message>
 
+				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+				<xsl:for-each
+					select="./descendant::*[@name]">
+					<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
+				</xsl:for-each>
+				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+				
+			</xsl:if>
 
+			<xsl:if test="./xsd:simpleContent">
 
+				<xsl:variable name="valueType">
+					<xsl:value-of select="./xsd:extension/@base" />
+				</xsl:variable>
 
+				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+				<xsl:for-each
+					select="./descendant::*[@name]">
+					<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
+				</xsl:for-each>
+				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
+
+			</xsl:if>
+
+<!-- 			<xsl:call-template
+				name="datatypePropertyOrObjectPropertyTranslationTemplate">
+				<xsl:with-param name="objects" select="fcn:findNamedChildren(.)" />
+			</xsl:call-template>
+
+			<xsl:call-template name="classTranslationTemplate">
+				<xsl:with-param name="subject" select="$subject" />
+				<xsl:with-param name="relation" select="$relation" />
+				<xsl:with-param name="objects" select="fcn:findNamedChildren(.)" />
+			</xsl:call-template> -->
 
 		</xsl:for-each>
 
 	</xsl:template>
 
+	<xsl:template name="datatypePropertyOrObjectPropertyTranslationTemplate">
+		<xsl:param name="objects" />
 
+		<xsl:for-each select="$objects">
 
+			<xsl:choose>
+				<xsl:when test="./@type and fcn:isXsdURI(./@type)">
+					<owl:DatatypeProperty rdf:about="{fcn:getFullName(./@type)}" />
+				</xsl:when>
+				<xsl:otherwise>
+					<owl:ObjectProperty rdf:about="{fcn:getFullName(fcn:getPredicate(./@name))}">
+						<rdfs:range rdf:resource="{fcn:getFullName(./@name)}" />
+					</owl:ObjectProperty>
+				</xsl:otherwise>
+			</xsl:choose>
 
+		</xsl:for-each>
+
+	</xsl:template>
+
+	<xsl:template name="classTranslationTemplate">
+		<xsl:param name="subject" />
+		<xsl:param name="subclassOf" required="no" />
+		<xsl:param name="directProperties" required="no" />
+		<xsl:param name="collectionProperties" required="no" />
+		<xsl:param name="collectionType" required="no" />
+
+		<owl:Class rdf:about="{fcn:getFullName($subject)}">
+		
+			<xsl:if test="$subclassOf" >
+				<rdfs:subClassOf rdf:resource="fcn:getFullName($subclassOf)"/>
+			</xsl:if>
+			
+			<xsl:if test="$directProperties">
+				<rdfs:subClassOf>
+					<xsl:for-each select="$directProperties">
+         				<xsl:call-template name="propertyTranslationTemplate">
+							<xsl:with-param name="properties" select="$directProperties" />
+						</xsl:call-template>
+					</xsl:for-each>
+				</rdfs:subClassOf>
+			</xsl:if>
+
+			<xsl:if test="$collectionProperties">
+			<xsl:choose>
+				<xsl:when
+					test="fcn:getQName($collectionType) = 'xsd:sequence' or 
+						fcn:getQName($collectionType) = 'xsd:all'">
+					<rdfs:subClassOf>
+						<owl:Class>
+							<owl:intersectionOf rdf:parseType="Collection">
+								<xsl:call-template name="propertyTranslationTemplate">
+									<xsl:with-param name="properties" select="$collectionProperties" />
+								</xsl:call-template>
+							</owl:intersectionOf>
+						</owl:Class>
+					</rdfs:subClassOf>
+				</xsl:when>
+				
+				<xsl:when test="fcn:getQName($collectionType) = 'xsd:choice'">
+					<rdfs:subClassOf>
+						<owl:Class>
+							<owl:unionOf rdf:parseType="Collection">
+								<xsl:call-template name="propertyTranslationTemplate">
+									<xsl:with-param name="properties" select="$collectionProperties" />
+								</xsl:call-template>
+							</owl:unionOf>
+						</owl:Class>
+					</rdfs:subClassOf>
+				</xsl:when>
+				<xsl:otherwise>
+				</xsl:otherwise>
+			</xsl:choose>
+			</xsl:if>
+			
+		</owl:Class>
+
+	</xsl:template>
+
+	<xsl:template name="propertyTranslationTemplate">
+		<xsl:param name="properties" />
+
+		<xsl:for-each select="$properties">
+
+			<xsl:variable name="predicate">
+				<xsl:choose>
+					<xsl:when test="./@type and fcn:isXsdURI(./@type)">
+						<xsl:value-of select="./@name" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="fcn:getPredicate(./@name)" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
+			<xsl:variable name="object">
+				<xsl:choose>
+					<xsl:when test="./@type and fcn:isXsdURI(./@type)">
+						<xsl:value-of select="./@type" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="./@name" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="{fcn:getFullName($predicate)}" />
+				<owl:allValuesFrom rdf:resource="{fcn:getFullName($object)}" />
+			</owl:Restriction>
+
+		</xsl:for-each>
+
+	</xsl:template>
 
 	<xsl:template name="enumEndlessLoop">
 		<xsl:param name="pos" />
