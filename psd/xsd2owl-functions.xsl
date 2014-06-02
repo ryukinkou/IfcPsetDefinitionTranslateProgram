@@ -239,4 +239,19 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
+
+	<!-- 名字发生器 -->
+	<xsl:function name="fcn:generateName">
+		<xsl:param name="array" />
+		<xsl:variable name="length" select="count($array)" />
+		<xsl:choose>
+			<xsl:when test="$length = 1">
+				<xsl:sequence select="$array[1]" />
+			</xsl:when>
+			<xsl:when test="$length > 1">
+				<xsl:sequence select="concat($array[$length - 1],'_',$array[$length])" />
+			</xsl:when>
+		</xsl:choose>
+	</xsl:function>
+
 </xsl:stylesheet>

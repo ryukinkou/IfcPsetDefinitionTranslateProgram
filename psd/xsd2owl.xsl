@@ -146,15 +146,15 @@
 
 			<owl:ObjectProperty rdf:ID="any" />
 
-			<xsl:call-template name="datatype" />
+			<xsl:call-template name="property" />
 
-			<xsl:call-template name="clazz" />
+			<xsl:call-template name="simpleTypeTranslationTemplate" />
 
 		</rdf:RDF>
 
 	</xsl:template>
 
-	<xsl:template name="datatype">
+	<xsl:template name="property">
 
 		<xsl:for-each
 			select=" 
@@ -177,87 +177,72 @@
 
 				</xsl:when>
 				<xsl:otherwise>
+
 					<owl:ObjectProperty
 						rdf:about="{fcn:getFullName(fcn:getPredicate($currentName))}">
 					</owl:ObjectProperty>
+
 				</xsl:otherwise>
 			</xsl:choose>
 
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template name="clazz">
+	<xsl:template name="simpleTypeTranslationTemplate">
 
-		<xsl:for-each select="//xsd:complexType">
+		<xsl:for-each select="//xsd:simpleType">
 
-			<xsl:variable name="layer1Tag" select="./name()" />
-			<xsl:variable name="layer1Name" select="./@name" />
+			<xsl:variable name="simpleTypeName"
+				select="fcn:generateName(./ancestor::*[@name]/@name)" />
 
-			<!-- 如果tag1Name为空，向前偏移1 -->
-			<xsl:variable name="layerMinus1Tag" select="./parent::*/name()" />
-			<xsl:variable name="layerMinus1Name" select="./parent::*/@name" />
+			<xsl:variable name="enumArray" as="element()*"
+				select="./descendant::xsd:enumeration" />
 
 			<xsl:choose>
+				<xsl:when test="count($enumArray) > 1">
+					<rdfs:Datatype rdf:about="{fcn:getFullName($simpleTypeName)}">
+						<owl:equivalentClass>
+							<rdfs:Datatype>
+								<owl:oneOf>
+									<xsl:call-template name="enumEndlessLoop">
+										<xsl:with-param name="pos" select="1" />
+										<xsl:with-param name="array" select="$enumArray" />
+									</xsl:call-template>
+								</owl:oneOf>
+							</rdfs:Datatype>
+						</owl:equivalentClass>
+					</rdfs:Datatype>
+				</xsl:when>
+			</xsl:choose>
 
-				<xsl:when test="./*[name() != 'xs:annotation']">
+		</xsl:for-each>
 
-					<xsl:for-each select="./*[name() != 'xs:annotation']">
+	</xsl:template>
 
-						<xsl:variable name="layer2Tag" select="./name()" />
-						<xsl:variable name="layer2Name" select="./@name" />
+	<xsl:template name="enumEndlessLoop">
+		<xsl:param name="pos" />
+		<xsl:param name="array" />
 
-						<xsl:choose>
-							<xsl:when test="./*[name() != 'xs:annotation']">
+		<rdf:Description>
+			<rdf:first>
+				<xsl:value-of select="$array[$pos]/@value" />
+			</rdf:first>
 
-								<xsl:for-each select="./*[name() != 'xs:annotation']">
-
-									<xsl:variable name="layer3Tag" select="./name()" />
-									<xsl:variable name="layer3Name" select="./@name" />
-
-									<!-- 如果tag1Name为空，向后偏移1 -->
-									<xsl:variable name="layerPlus1Tag" select="child::*[1]/name()" />
-									<xsl:variable name="layerPlus1Name" select="child::*[1]/@name" />
-
-									<xsl:message select="'----------------------------------------'" />
-									<xsl:message
-										select="concat($layerMinus1Name,' m ',$layer1Name,' | ',$layer2Name,' | ',$layer3Name,' p ',$layerPlus1Name)" />
-									<xsl:message
-										select="concat($layerMinus1Tag,' m ',$layer1Tag,' | ',$layer2Tag,' | ',$layer3Tag,' p ',$layerPlus1Tag)" />
-
-
-								</xsl:for-each>
-
-							</xsl:when>
-							<xsl:otherwise>
-
-								<!-- 向前偏移 -->
-								<xsl:variable name="layerMinus1Tag" select="parent::*/name()" />
-								<xsl:variable name="layerMinus1Name" select="parent::*/@name" />
-
-								<xsl:variable name="layerMinus2Tag" select="parent::*/parent::*/name()" />
-								<xsl:variable name="layerMinus2Name" select="parent::*/parent::*/@name" />
-
-								<xsl:message select="'----------------------------------------'" />
-								<xsl:message
-									select="concat($layerMinus2Name,' | ', $layerMinus1Name,' m ', $layer1Name,' | ',$layer2Name)" />
-								<xsl:message
-									select="concat($layerMinus2Tag,' | ', $layerMinus1Tag , ' m ' ,$layer1Tag,' | ',$layer2Tag)" />
-
-							</xsl:otherwise>
-
-						</xsl:choose>
-
-					</xsl:for-each>
-
+			<xsl:choose>
+				<xsl:when test="count($array) >= $pos">
+					<rdf:rest>
+						<xsl:call-template name="endlessLoop">
+							<xsl:with-param name="pos" select="$pos + 1" />
+							<xsl:with-param name="array" select="$array" />
+						</xsl:call-template>
+					</rdf:rest>
 				</xsl:when>
 				<xsl:otherwise>
-
-
-
+					<rdf:rest rdf:resource="&amp;rdf;nil" />
 				</xsl:otherwise>
-
 			</xsl:choose>
-		</xsl:for-each>
+
+		</rdf:Description>
 
 	</xsl:template>
 
