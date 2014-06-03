@@ -19,6 +19,7 @@
       <rdfs:comment>IFC</rdfs:comment>
    </owl:Ontology>
    <owl:ObjectProperty rdf:ID="any"/>
+   <rdfs:Datatype rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#currencytype"/>
    <rdfs:Datatype rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#templatetype">
       <owl:equivalentClass>
          <rdfs:Datatype>
@@ -1087,4 +1088,920 @@
          </rdfs:Datatype>
       </owl:equivalentClass>
    </rdfs:Datatype>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ifdguid">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasIfcVersion">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#IfcVersion"/>
+   </owl:ObjectProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Applicability">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasApplicableClasses">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ApplicableClasses"/>
+   </owl:ObjectProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ApplicableTypeValue">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDefs">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDefs"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPsetDefinitionAliases">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAliases"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertySetDef">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ifdguid"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#templatetype"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasIfcVersion"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#IfcVersion"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Applicability"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasApplicableClasses"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ApplicableClasses"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ApplicableTypeValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDefs"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDefs"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPsetDefinitionAliases"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAliases"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#version">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#schema">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#IfcVersion">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#version"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#schema"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ClassName">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ApplicableClasses">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ClassName"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDef">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDef"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDefs">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDef"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDef"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPsetDefinitionAlias">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAlias"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAliases">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPsetDefinitionAlias"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAlias"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PsetDefinitionAlias">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ifdguid">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValueDef">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueDef"/>
+   </owl:ObjectProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAliases">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAliases">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyType"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDef">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ifdguid"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValueDef"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueDef"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAliases"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAliases"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyType"/>
+               </owl:Restriction>
+            </owl:unionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasMinValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MinValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasMaxValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MaxValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefaultValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefaultValue"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueDef">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasMinValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MinValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasMaxValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MaxValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefaultValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefaultValue"/>
+               </owl:Restriction>
+            </owl:unionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MinValue">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#MaxValue">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefaultValue">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAlias">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAlias"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAlias">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAlias"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertySingleValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertySingleValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyEnumeratedValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyEnumeratedValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyBoundedValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyBoundedValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyTableValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyTableValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyReferenceValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyReferenceValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyListValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyListValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypeComplexProperty">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypeComplexProperty"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyType">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertySingleValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertySingleValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyEnumeratedValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyEnumeratedValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyBoundedValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyBoundedValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyTableValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyTableValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyReferenceValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyReferenceValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypePropertyListValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyListValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasTypeComplexProperty"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypeComplexProperty"/>
+               </owl:Restriction>
+            </owl:unionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertySingleValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasEnumList">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#EnumList"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasConstantList">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantList"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyEnumeratedValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasEnumList"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#EnumList"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasConstantList"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantList"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#EnumItem">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#EnumList">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#name"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#EnumItem"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasConstantDef">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantDef"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantList">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasConstantDef"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantDef"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValueRangeDef">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueRangeDef"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyBoundedValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValueRangeDef"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueRangeDef"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasLowerBoundValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#LowerBoundValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUpperBoundValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UpperBoundValue"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueRangeDef">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasLowerBoundValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#LowerBoundValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUpperBoundValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UpperBoundValue"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#LowerBoundValue">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UpperBoundValue">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Expression">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefiningValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefiningValue"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinedValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinedValue"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyTableValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Expression"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefiningValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefiningValue"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinedValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinedValue"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefiningValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinedValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyReferenceValue">
+      <rdfs:subClassOf rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ReferenceSelect"/>
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasListValue">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ListValue"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypePropertyListValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasListValue"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ListValue"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ListValue">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDataType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasUnitType"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasValues"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDef">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDef"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#TypeComplexProperty">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#name"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasPropertyDef"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#PropertyDef"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DataType">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#type"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+   <owl:DatatypeProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#UnitType">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#type"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#currencytype"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#guid">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#URL">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#libraryname">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#sectionref">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ReferenceSelect">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#reftype"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#guid"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#URL"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#libraryname"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#sectionref"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueItem">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Values">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ValueItem"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAliases">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAliases">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#ConstantDef">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Name"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#Definition"/>
+                  <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAliases"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases"/>
+               </owl:Restriction>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAliases"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases"/>
+               </owl:Restriction>
+            </owl:unionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAlias">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAliases">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasNameAlias"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#NameAlias">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAlias">
+      <rdfs:range rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAliases">
+      <rdfs:subClassOf>
+         <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#hasDefinitionAlias"/>
+                  <owl:allValuesFrom rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias"/>
+               </owl:Restriction>
+            </owl:intersectionOf>
+         </owl:Class>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:DatatypeProperty rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang">
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+   </owl:DatatypeProperty>
+   <owl:Class rdf:about="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#DefinitionAlias">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#value"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://www.buildingsmart-tech.org/ifcXML/IFC4/final#lang"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
 </rdf:RDF>

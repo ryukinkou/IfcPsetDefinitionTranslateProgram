@@ -146,6 +146,9 @@
 
 			<owl:ObjectProperty rdf:ID="any" />
 
+			<!-- irregular -->
+			<rdfs:Datatype rdf:about="{fcn:getFullName('currencytype')}" />
+
 			<xsl:call-template name="simpleTypeTranslationTemplate" />
 
 			<xsl:call-template name="complexTypeTranslationTemplate" />
@@ -157,9 +160,6 @@
 	<xsl:template name="simpleTypeTranslationTemplate">
 
 		<xsl:for-each select="//xsd:simpleType">
-
-			<!-- <xsl:variable name="simpleTypeName" select="fcn:generateName(./ancestor::*[@name]/@name)" 
-				/> -->
 
 			<xsl:variable name="simpleTypeName" select="./parent::*[@name]/@name" />
 
@@ -201,76 +201,110 @@
 					</xsl:when>
 				</xsl:choose>
 			</xsl:variable>
-			
+
 			<xsl:variable name="collectionType">
-					<xsl:value-of
-						select="./descendant::*[
+				<xsl:value-of
+					select="./descendant::*[
 						fcn:getQName(name())='xsd:choice' or 
 						fcn:getQName(name())='xsd:sequence' or
 						fcn:getQName(name())='xsd:all'][1]/name()" />
 			</xsl:variable>
-			
-			<xsl:message>-------------------------------------------</xsl:message>
-			<xsl:message>subject: <xsl:value-of select="$subject" /></xsl:message>
 
-			<!-- 非继承式定义法 END -->
-			<xsl:for-each select="./child::*[@name]">
-				<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
-			</xsl:for-each>
-			
-			<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-			<xsl:for-each
-				select="(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]">
-				<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
-			</xsl:for-each>
-			<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-			<!-- 非继承式定义法 END -->
+			<xsl:if
+				test="
+					./child::*[@name] or 
+					(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]">
 
-			<!-- TODO 模板调用，when逻辑处理 -->
+				<!-- predicate generation start -->
+				<xsl:if test="./child::*[@name]">
+
+					<xsl:call-template
+						name="datatypePropertyOrObjectPropertyTranslationTemplate">
+						<xsl:with-param name="objects" select="./child::*[@name]" />
+					</xsl:call-template>
+
+				</xsl:if>
+
+				<xsl:if
+					test="(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]">
+					<xsl:call-template
+						name="datatypePropertyOrObjectPropertyTranslationTemplate">
+						<xsl:with-param name="objects"
+							select="(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]" />
+					</xsl:call-template>
+				</xsl:if>
+				<!-- predicate generation end -->
+
+				<!-- class generation -->
+				<xsl:call-template name="classTranslationTemplate">
+					<xsl:with-param name="subject" select="$subject" />
+					<xsl:with-param name="directProperties" select="./child::*[@name]" />
+					<xsl:with-param name="collectionProperties"
+						select="(./xsd:choice | ./xsd:sequence | ./xsd:all)/child::*[@name]" />
+					<xsl:with-param name="collectionType" select="$collectionType" />
+				</xsl:call-template>
+
+			</xsl:if>
 
 			<!-- 复杂类型扩展型 -->
 			<xsl:if test="./xsd:complexContent">
-			
-				<xsl:variable name="subclassOf">
-					<xsl:value-of select="./descendant::xsd:extension/@base" />
-				</xsl:variable>
-				
-				<xsl:message>subclassOf: <xsl:value-of select="$subclassOf" /></xsl:message>
 
-				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-				<xsl:for-each
-					select="./descendant::*[@name]">
-					<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
-				</xsl:for-each>
-				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-				
+				<xsl:call-template
+					name="datatypePropertyOrObjectPropertyTranslationTemplate">
+					<xsl:with-param name="objects" select="./descendant::*[@name]" />
+				</xsl:call-template>
+
+				<xsl:choose>
+					<xsl:when test="$collectionType != ''">
+						<xsl:call-template name="classTranslationTemplate">
+							<xsl:with-param name="subject" select="$subject" />
+							<xsl:with-param name="subclassOf"
+								select="./descendant::xsd:extension/@base" />
+							<xsl:with-param name="collectionProperties"
+								select="./descendant::*[@name]" />
+							<xsl:with-param name="collectionType" select="$collectionType" />
+						</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="classTranslationTemplate">
+							<xsl:with-param name="subject" select="$subject" />
+							<xsl:with-param name="subclassOf"
+								select="./descendant::xsd:extension/@base" />
+							<xsl:with-param name="directProperties" select="./descendant::*[@name]" />
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+
 			</xsl:if>
 
 			<xsl:if test="./xsd:simpleContent">
 
-				<xsl:variable name="valueType">
-					<xsl:value-of select="./xsd:extension/@base" />
-				</xsl:variable>
+				<xsl:call-template
+					name="datatypePropertyOrObjectPropertyTranslationTemplate">
+					<xsl:with-param name="objects" select="./descendant::*[@name]" />
+				</xsl:call-template>
 
-				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-				<xsl:for-each
-					select="./descendant::*[@name]">
-					<xsl:message>property:<xsl:value-of select="./@name" /></xsl:message>
-				</xsl:for-each>
-				<xsl:message>---<xsl:value-of select="$collectionType" /></xsl:message>
-
+				<xsl:choose>
+					<xsl:when test="$collectionType != ''">
+						<xsl:call-template name="classTranslationTemplate">
+							<xsl:with-param name="subject" select="$subject" />
+							<xsl:with-param name="collectionProperties"
+								select="./descendant::*[@name]" />
+							<xsl:with-param name="collectionType" select="$collectionType" />
+							<xsl:with-param name="additionalProperty"
+								select="./descendant::xsd:extension/@base" />
+						</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="classTranslationTemplate">
+							<xsl:with-param name="subject" select="$subject" />
+							<xsl:with-param name="directProperties" select="./descendant::*[@name]" />
+							<xsl:with-param name="additionalProperty"
+								select="./descendant::xsd:extension/@base" />
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:if>
-
-<!-- 			<xsl:call-template
-				name="datatypePropertyOrObjectPropertyTranslationTemplate">
-				<xsl:with-param name="objects" select="fcn:findNamedChildren(.)" />
-			</xsl:call-template>
-
-			<xsl:call-template name="classTranslationTemplate">
-				<xsl:with-param name="subject" select="$subject" />
-				<xsl:with-param name="relation" select="$relation" />
-				<xsl:with-param name="objects" select="fcn:findNamedChildren(.)" />
-			</xsl:call-template> -->
 
 		</xsl:for-each>
 
@@ -282,14 +316,32 @@
 		<xsl:for-each select="$objects">
 
 			<xsl:choose>
+
 				<xsl:when test="./@type and fcn:isXsdURI(./@type)">
-					<owl:DatatypeProperty rdf:about="{fcn:getFullName(./@type)}" />
+					<owl:DatatypeProperty rdf:about="{fcn:getFullName(./@name)}">
+						<rdfs:range rdf:resource="{fcn:getFullName(./@type)}" />
+					</owl:DatatypeProperty>
 				</xsl:when>
+
 				<xsl:otherwise>
-					<owl:ObjectProperty rdf:about="{fcn:getFullName(fcn:getPredicate(./@name))}">
-						<rdfs:range rdf:resource="{fcn:getFullName(./@name)}" />
-					</owl:ObjectProperty>
+					<xsl:choose>
+						<xsl:when test="./xsd:simpleType">
+							<owl:DatatypeProperty rdf:resource="{fcn:getFullName('value')}" />
+						</xsl:when>
+						<!-- irregular branch -->
+						<xsl:when test="./@name = 'currencytype'">
+							<owl:DatatypeProperty rdf:resource="{fcn:getFullName('value')}" />
+						</xsl:when>
+						<xsl:otherwise>
+							<owl:ObjectProperty
+								rdf:about="{fcn:getFullName(fcn:getPredicate(./@name))}">
+								<rdfs:range rdf:resource="{fcn:getFullName(./@name)}" />
+							</owl:ObjectProperty>
+						</xsl:otherwise>
+					</xsl:choose>
+
 				</xsl:otherwise>
+
 			</xsl:choose>
 
 		</xsl:for-each>
@@ -302,61 +354,72 @@
 		<xsl:param name="directProperties" required="no" />
 		<xsl:param name="collectionProperties" required="no" />
 		<xsl:param name="collectionType" required="no" />
+		<xsl:param name="additionalProperty" required="no" />
 
 		<owl:Class rdf:about="{fcn:getFullName($subject)}">
-		
-			<xsl:if test="$subclassOf" >
-				<rdfs:subClassOf rdf:resource="fcn:getFullName($subclassOf)"/>
+
+			<xsl:if test="$subclassOf">
+				<rdfs:subClassOf rdf:resource="{fcn:getFullName($subclassOf)}" />
 			</xsl:if>
-			
-			<xsl:if test="$directProperties">
+
+			<!-- generate an additional property -->
+			<xsl:if test="$additionalProperty">
 				<rdfs:subClassOf>
-					<xsl:for-each select="$directProperties">
-         				<xsl:call-template name="propertyTranslationTemplate">
-							<xsl:with-param name="properties" select="$directProperties" />
-						</xsl:call-template>
-					</xsl:for-each>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="{fcn:getFullName('value')}" />
+						<owl:allValuesFrom rdf:resource="{fcn:getFullName($additionalProperty)}" />
+					</owl:Restriction>
 				</rdfs:subClassOf>
 			</xsl:if>
 
-			<xsl:if test="$collectionProperties">
-			<xsl:choose>
-				<xsl:when
-					test="fcn:getQName($collectionType) = 'xsd:sequence' or 
-						fcn:getQName($collectionType) = 'xsd:all'">
-					<rdfs:subClassOf>
-						<owl:Class>
-							<owl:intersectionOf rdf:parseType="Collection">
-								<xsl:call-template name="propertyTranslationTemplate">
-									<xsl:with-param name="properties" select="$collectionProperties" />
-								</xsl:call-template>
-							</owl:intersectionOf>
-						</owl:Class>
-					</rdfs:subClassOf>
-				</xsl:when>
-				
-				<xsl:when test="fcn:getQName($collectionType) = 'xsd:choice'">
-					<rdfs:subClassOf>
-						<owl:Class>
-							<owl:unionOf rdf:parseType="Collection">
-								<xsl:call-template name="propertyTranslationTemplate">
-									<xsl:with-param name="properties" select="$collectionProperties" />
-								</xsl:call-template>
-							</owl:unionOf>
-						</owl:Class>
-					</rdfs:subClassOf>
-				</xsl:when>
-				<xsl:otherwise>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:if test="$directProperties">
+				<xsl:call-template name="propertyTranslationTemplate">
+					<xsl:with-param name="properties" select="$directProperties" />
+					<xsl:with-param name="isCollection" select="false()" />
+				</xsl:call-template>
 			</xsl:if>
-			
+
+			<xsl:if test="$collectionProperties">
+				<xsl:choose>
+					<xsl:when
+						test="fcn:getQName($collectionType) = 'xsd:sequence' or 
+						fcn:getQName($collectionType) = 'xsd:all'">
+						<rdfs:subClassOf>
+							<owl:Class>
+								<owl:intersectionOf rdf:parseType="Collection">
+									<xsl:call-template name="propertyTranslationTemplate">
+										<xsl:with-param name="properties" select="$collectionProperties" />
+										<xsl:with-param name="isCollection" select="true()" />
+									</xsl:call-template>
+								</owl:intersectionOf>
+							</owl:Class>
+						</rdfs:subClassOf>
+					</xsl:when>
+
+					<xsl:when test="fcn:getQName($collectionType) = 'xsd:choice'">
+						<rdfs:subClassOf>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<xsl:call-template name="propertyTranslationTemplate">
+										<xsl:with-param name="properties" select="$collectionProperties" />
+										<xsl:with-param name="isCollection" select="true()" />
+									</xsl:call-template>
+								</owl:unionOf>
+							</owl:Class>
+						</rdfs:subClassOf>
+					</xsl:when>
+					<xsl:otherwise>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
+
 		</owl:Class>
 
 	</xsl:template>
 
 	<xsl:template name="propertyTranslationTemplate">
 		<xsl:param name="properties" />
+		<xsl:param name="isCollection" required="no" />
 
 		<xsl:for-each select="$properties">
 
@@ -366,7 +429,18 @@
 						<xsl:value-of select="./@name" />
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="fcn:getPredicate(./@name)" />
+						<xsl:choose>
+							<xsl:when test="./xsd:simpleType">
+								<xsl:value-of select="'value'" />
+							</xsl:when>
+							<!-- irregular branch -->
+							<xsl:when test="./@name = 'currencytype'">
+								<xsl:value-of select="'value'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="fcn:getPredicate(./@name)" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
@@ -382,10 +456,22 @@
 				</xsl:choose>
 			</xsl:variable>
 
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="{fcn:getFullName($predicate)}" />
-				<owl:allValuesFrom rdf:resource="{fcn:getFullName($object)}" />
-			</owl:Restriction>
+			<xsl:choose>
+				<xsl:when test="$isCollection = true()">
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="{fcn:getFullName($predicate)}" />
+						<owl:allValuesFrom rdf:resource="{fcn:getFullName($object)}" />
+					</owl:Restriction>
+				</xsl:when>
+				<xsl:otherwise>
+					<rdfs:subClassOf>
+						<owl:Restriction>
+							<owl:onProperty rdf:resource="{fcn:getFullName($predicate)}" />
+							<owl:allValuesFrom rdf:resource="{fcn:getFullName($object)}" />
+						</owl:Restriction>
+					</rdfs:subClassOf>
+				</xsl:otherwise>
+			</xsl:choose>
 
 		</xsl:for-each>
 
