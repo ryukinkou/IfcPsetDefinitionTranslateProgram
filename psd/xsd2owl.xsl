@@ -149,6 +149,8 @@
 			<!-- irregular -->
 			<rdfs:Datatype rdf:about="{fcn:getFullName('currencytype')}" />
 
+			<rdfs:Datatype rdf:about="{fcn:getFullName('values')}" />
+
 			<xsl:call-template name="simpleTypeTranslationTemplate" />
 
 			<xsl:call-template name="complexTypeTranslationTemplate" />
@@ -318,7 +320,20 @@
 			<xsl:choose>
 
 				<xsl:when test="./@type and fcn:isXsdURI(./@type)">
-					<owl:DatatypeProperty rdf:about="{fcn:getFullName(./@name)}">
+
+					<xsl:variable name="givenName">
+						<xsl:choose>
+							<!-- value is reserved word -->
+							<xsl:when test="./@name = 'value'">
+								<xsl:value-of select="'values'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="./@name" />
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+
+					<owl:DatatypeProperty rdf:about="{fcn:getFullName($givenName)}">
 						<rdfs:range rdf:resource="{fcn:getFullName(./@type)}" />
 					</owl:DatatypeProperty>
 				</xsl:when>
@@ -326,11 +341,11 @@
 				<xsl:otherwise>
 					<xsl:choose>
 						<xsl:when test="./xsd:simpleType">
-							<owl:DatatypeProperty rdf:resource="{fcn:getFullName('value')}" />
+							<owl:DatatypeProperty rdf:about="{fcn:getFullName('values')}" />
 						</xsl:when>
 						<!-- irregular branch -->
 						<xsl:when test="./@name = 'currencytype'">
-							<owl:DatatypeProperty rdf:resource="{fcn:getFullName('value')}" />
+							<owl:DatatypeProperty rdf:about="{fcn:getFullName('values')}" />
 						</xsl:when>
 						<xsl:otherwise>
 							<owl:ObjectProperty
@@ -366,7 +381,7 @@
 			<xsl:if test="$additionalProperty">
 				<rdfs:subClassOf>
 					<owl:Restriction>
-						<owl:onProperty rdf:resource="{fcn:getFullName('value')}" />
+						<owl:onProperty rdf:resource="{fcn:getFullName('values')}" />
 						<owl:allValuesFrom rdf:resource="{fcn:getFullName($additionalProperty)}" />
 					</owl:Restriction>
 				</rdfs:subClassOf>
@@ -426,16 +441,24 @@
 			<xsl:variable name="predicate">
 				<xsl:choose>
 					<xsl:when test="./@type and fcn:isXsdURI(./@type)">
-						<xsl:value-of select="./@name" />
+						<xsl:choose>
+							<!-- value is reserved word -->
+							<xsl:when test="./@name = 'value'">
+								<xsl:value-of select="'values'" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="./@name" />
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
 							<xsl:when test="./xsd:simpleType">
-								<xsl:value-of select="'value'" />
+								<xsl:value-of select="'values'" />
 							</xsl:when>
 							<!-- irregular branch -->
 							<xsl:when test="./@name = 'currencytype'">
-								<xsl:value-of select="'value'" />
+								<xsl:value-of select="'values'" />
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="fcn:getPredicate(./@name)" />
